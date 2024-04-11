@@ -1,0 +1,241 @@
+openapi: 3.1.0
+info:
+  title: OAS 3.1.0 Playground
+paths:
+  /:
+    get:
+      summary: basic endpoint
+      responses:
+        200:
+          description: ok
+
+  /json/{required}/{nullable}/{optional}:
+    post:
+      parameters:
+        # path
+        - in: path
+          name: required
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: nullable
+          required: true
+          schema:
+            type: 
+              - string
+              - 'null'
+        - in: path
+          name: optional
+          required: false
+          schema:
+            type: string
+        # query
+        - in: query
+          name: required
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: nullable
+          required: true
+          schema:
+            type: 
+              - string
+              - 'null'
+        - in: query
+          name: optional
+          required: false
+          schema:
+            type: string
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/allTypes'
+      responses:
+        200: 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/allTypes'
+  /multipart_form-data/{required}/{nullable}/{optional}:
+    post:
+      parameters:
+        # path
+        - in: path
+          name: required
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: nullable
+          required: true
+          schema:
+            type: 
+              - string
+              - 'null'
+        - in: path
+          name: optional
+          required: false
+          schema:
+            type: string
+        # query
+        - in: query
+          name: required
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: nullable
+          required: true
+          schema:
+            type: 
+              - string
+              - 'null'
+        - in: query
+          name: optional
+          required: false
+          schema:
+            type: string
+
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/allTypes'
+      responses:
+        200: 
+          content:
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/allTypes'
+              
+  /binary/optional:
+    post:
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              $ref: "#/components/schemas/optionalBinary"
+      responses:
+        200:
+          description: ok
+          content:
+            application/octet-stream:
+              schema:
+                $ref: "#/components/schemas/optionalBinary"
+
+  /binary/required:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              $ref: "#/components/schemas/requiredBinary"
+      responses:
+        200:
+          description: ok
+          content:
+            application/octet-stream:
+              schema:
+                $ref: "#/components/schemas/requiredBinary"
+  /binary/nullable:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              $ref: "#/components/schemas/nullableBinary"
+      responses:
+        200:
+          description: ok
+          content:
+            application/octet-stream:
+              schema:
+                $ref: "#/components/schemas/nullableBinary"
+components: 
+  schemas:
+    allTypes:
+      type: object
+      required:
+        - required
+        - nullable
+        # - optional
+        - boolean
+        - number
+        - object
+        - array
+        - enum
+        - int64
+        - int32
+        - float
+        - double
+        - password
+      properties:
+        required:
+          type: string
+        nullable:
+          type:
+            - string
+            - 'null'
+        optional:
+          type: string
+        boolean:
+          type: boolean
+        number:
+          type: number
+        integer:
+          type: integer
+        object:
+          type: object
+          properties:
+            key:
+              type: string
+        array:
+          type: array
+          items:
+            type: string
+        enum:
+          type: 
+            - 'foo'
+            - 'bar'
+            - 'baz'
+          x-enumNames:
+            - 'Foo'
+            - 'Bar'
+            - 'Baz'
+        int64:
+          type: integer
+          format: int64
+        int32:
+          type: integer
+          format: int32
+        float:
+          type: number
+          format: float
+        double:
+          type: number
+          format: double
+        password:
+          type: string
+          format: password
+    requiredBinary:
+      type: string
+      format: binary
+      required: true
+    optionalBinary:
+      type: string
+      format: binary
+      required: false
+    nullableBinary:
+      type: 
+        - string
+        - 'null'
+      format: binary
+      required: false
