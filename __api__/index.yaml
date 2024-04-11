@@ -4,6 +4,8 @@ info:
 paths:
   /:
     get:
+      tags: 
+        - basic
       summary: basic endpoint
       responses:
         200:
@@ -11,6 +13,8 @@ paths:
 
   /json/{required}/{nullable}/{optional}:
     post:
+      tags: 
+        - json
       parameters:
         # path
         - in: path
@@ -54,15 +58,18 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/allTypes'
+              $ref: '#/components/schemas/json'
       responses:
         200: 
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/allTypes'
+                $ref: '#/components/schemas/json'
+
   /multipart_form-data/{required}/{nullable}/{optional}:
     post:
+      tags: 
+        - multipartFormData
       parameters:
         # path
         - in: path
@@ -106,16 +113,18 @@ paths:
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/allTypes'
+              $ref: '#/components/schemas/multipartFormData'
       responses:
         200: 
           content:
             multipart/form-data:
               schema:
-                $ref: '#/components/schemas/allTypes'
+                $ref: '#/components/schemas/multipartFormData'
               
   /binary/optional:
     post:
+      tags: 
+        -  optionalBinary
       requestBody:
         content:
           application/octet-stream:
@@ -131,6 +140,8 @@ paths:
 
   /binary/required:
     post:
+      tags: 
+        -  requiredBinary
       requestBody:
         required: true
         content:
@@ -144,8 +155,11 @@ paths:
             application/octet-stream:
               schema:
                 $ref: "#/components/schemas/requiredBinary"
+
   /binary/nullable:
     post:
+      tags: 
+        -  nullableBinary
       requestBody:
         required: true
         content:
@@ -161,7 +175,7 @@ paths:
                 $ref: "#/components/schemas/nullableBinary"
 components: 
   schemas:
-    allTypes:
+    json:
       type: object
       required:
         - required
@@ -169,6 +183,7 @@ components:
         # - optional
         - boolean
         - number
+        - integer
         - object
         - array
         - enum
@@ -202,14 +217,66 @@ components:
           items:
             type: string
         enum:
-          type: 
-            - 'foo'
-            - 'bar'
-            - 'baz'
-          x-enumNames:
-            - 'Foo'
-            - 'Bar'
-            - 'Baz'
+          $ref: "#/components/schemas/enum"
+        int64:
+          type: integer
+          format: int64
+        int32:
+          type: integer
+          format: int32
+        float:
+          type: number
+          format: float
+        double:
+          type: number
+          format: double
+        password:
+          type: string
+          format: password
+
+    multipartFormData:
+      type: object
+      required:
+        - required
+        - nullable
+        # - optional
+        - boolean
+        - number
+        - integer
+        - object
+        - array
+        - enum
+        - int64
+        - int32
+        - float
+        - double
+        - password
+      properties:
+        required:
+          type: string
+        nullable:
+          type:
+            - string
+            - 'null'
+        optional:
+          type: string
+        boolean:
+          type: boolean
+        number:
+          type: number
+        integer:
+          type: integer
+        object:
+          type: object
+          properties:
+            key:
+              type: string
+        array:
+          type: array
+          items:
+            type: string
+        enum:
+          $ref: "#/components/schemas/enum"
         int64:
           type: integer
           format: int64
@@ -239,3 +306,13 @@ components:
         - 'null'
       format: binary
       required: false
+    enum:
+      type: string
+      enum:
+        - dog
+        - cat
+        - bird
+      x-enumNames:
+        - Inu
+        - Neko
+        - Tori

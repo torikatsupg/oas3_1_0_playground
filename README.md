@@ -12,9 +12,9 @@ https://www.openapis.org/blog/2021/02/16/migrating-from-openapi-3-0-to-3-1-0
 
 
 - Generate API client from oas3.1.0 schema by orval
-    ```shell
-    npm run gen
-    ```
+  ```shell
+  npm run gen
+  ```
     
 - Preview API Definition
   ```
@@ -27,6 +27,6 @@ https://www.openapis.org/blog/2021/02/16/migrating-from-openapi-3-0-to-3-1-0
   ```
 
 - To see welcome message
-    ```
-    npm run start
-    ```
+  ```
+  npm run start
+  ```
