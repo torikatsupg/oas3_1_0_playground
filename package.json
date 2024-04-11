@@ -6,13 +6,18 @@
   "scripts": {
     "start": "ts-node index.ts",
     "oas:preview": "redocly preview-docs ./__api__/index.yaml",
-    "oas:lint": "redocly lint ./__api__/index.yaml"
+    "oas:lint": "redocly lint ./__api__/index.yaml",
+    "gen": "orval"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@redocly/cli": "^1.11.0",
+    "orval": "^6.27.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "axios": "^1.6.8"
   }
 }

@@ -4,6 +4,8 @@ info:
 paths:
   /:
     get:
+      tags: 
+        - basic
       summary: basic endpoint
       responses:
         200:
@@ -11,6 +13,8 @@ paths:
 
   /json/{required}/{nullable}/{optional}:
     post:
+      tags: 
+        - json
       parameters:
         # path
         - in: path
@@ -61,8 +65,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/allTypes'
+
   /multipart_form-data/{required}/{nullable}/{optional}:
     post:
+      tags: 
+        - multipartFormData
       parameters:
         # path
         - in: path
@@ -116,6 +123,8 @@ paths:
               
   /binary/optional:
     post:
+      tags: 
+        -  optionalBinary
       requestBody:
         content:
           application/octet-stream:
@@ -131,6 +140,8 @@ paths:
 
   /binary/required:
     post:
+      tags: 
+        -  requiredBinary
       requestBody:
         required: true
         content:
@@ -144,8 +155,11 @@ paths:
             application/octet-stream:
               schema:
                 $ref: "#/components/schemas/requiredBinary"
+
   /binary/nullable:
     post:
+      tags: 
+        -  nullableBinary
       requestBody:
         required: true
         content:
