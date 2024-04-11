@@ -4,11 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node index.ts"
+    "start": "ts-node index.ts",
+    "oas:preview": "redocly preview-docs ./__api__/index.yaml",
+    "oas:lint": "redocly lint ./__api__/index.yaml"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@redocly/cli": "^1.11.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   }

@@ -1,0 +1,48 @@
+openapi: 3.1.0
+info:
+  title: OAS 3.1.0 Playground
+paths:
+  /:
+    get:
+      summary: basic endpoint
+      responses:
+        200:
+          $ref: '#/components/responses/200'
+
+  /request/params/path/{required}/{nullable}/{optional}:
+    parameters:
+      - in: path
+        name: required
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: nullable
+        required: true
+        schema:
+          type: 
+            - string
+            - 'null'
+      - in: path
+        name: optional
+        required: false
+        schema:
+          type: string
+    get:
+      responses:
+        200:
+          $ref: '#/components/responses/200'
+
+components:
+  responses:
+    200:
+      description: OK
+    404:
+      description: OK
+#   tags:
+#     basic:
+#     request_params:
+#     method:
+#     request_body:
+#     response: 
+#     media_upload:
