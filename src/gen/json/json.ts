@@ -3,76 +3,124 @@
  * Do not edit manually.
  * OAS 3.1.0 Playground
  */
-import {
-  useMutation
-} from '@tanstack/react-query'
+import { useMutation } from "@tanstack/react-query";
 import type {
   MutationFunction,
   UseMutationOptions,
-  UseMutationResult
-} from '@tanstack/react-query'
+  UseMutationResult,
+} from "@tanstack/react-query";
 import type {
-  AllTypes,
-  PostJsonRequiredNullableOptionalParams
-} from '../oAS310Playground.schemas'
-import { httpClient } from '../../httpClient';
-
-
+  Json,
+  PostJsonRequiredNullableOptionalParams,
+} from "../oAS310Playground.schemas";
+import { httpClient } from "../../httpClient";
 
 export const postJsonRequiredNullableOptional = (
-    required: string,
-    nullable: string | null,
-    allTypes: AllTypes,
-    params: PostJsonRequiredNullableOptionalParams,
-    optional?: string,
- ) => {
-      
-      
-      return httpClient<AllTypes>(
-      {url: `/json/${required}/${nullable}/${optional}`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: allTypes,
-        params
+  required: string,
+  nullable: string | null,
+  json: Json,
+  params: PostJsonRequiredNullableOptionalParams,
+  optional?: string,
+) => {
+  return httpClient<Json>({
+    url: `/json/${required}/${nullable}/${optional}`,
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    data: json,
+    params,
+  });
+};
+
+export const getPostJsonRequiredNullableOptionalMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof postJsonRequiredNullableOptional>>,
+    TError,
+    {
+      required: string;
+      nullable: string | null;
+      data: Json;
+      params: PostJsonRequiredNullableOptionalParams;
+      optional?: string;
     },
-      );
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof postJsonRequiredNullableOptional>>,
+  TError,
+  {
+    required: string;
+    nullable: string | null;
+    data: Json;
+    params: PostJsonRequiredNullableOptionalParams;
+    optional?: string;
+  },
+  TContext
+> => {
+  const { mutation: mutationOptions } = options ?? {};
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof postJsonRequiredNullableOptional>>,
+    {
+      required: string;
+      nullable: string | null;
+      data: Json;
+      params: PostJsonRequiredNullableOptionalParams;
+      optional?: string;
     }
-  
+  > = (props) => {
+    const { required, nullable, data, params, optional } = props ?? {};
 
+    return postJsonRequiredNullableOptional(
+      required,
+      nullable,
+      data,
+      params,
+      optional,
+    );
+  };
 
-export const getPostJsonRequiredNullableOptionalMutationOptions = <TError = unknown,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postJsonRequiredNullableOptional>>, TError,{required: string;nullable: string | null;data: AllTypes;params: PostJsonRequiredNullableOptionalParams;optional?: string}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof postJsonRequiredNullableOptional>>, TError,{required: string;nullable: string | null;data: AllTypes;params: PostJsonRequiredNullableOptionalParams;optional?: string}, TContext> => {
-const {mutation: mutationOptions} = options ?? {};
+  return { mutationFn, ...mutationOptions };
+};
 
-      
+export type PostJsonRequiredNullableOptionalMutationResult = NonNullable<
+  Awaited<ReturnType<typeof postJsonRequiredNullableOptional>>
+>;
+export type PostJsonRequiredNullableOptionalMutationBody = Json;
+export type PostJsonRequiredNullableOptionalMutationError = unknown;
 
+export const usePostJsonRequiredNullableOptional = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof postJsonRequiredNullableOptional>>,
+    TError,
+    {
+      required: string;
+      nullable: string | null;
+      data: Json;
+      params: PostJsonRequiredNullableOptionalParams;
+      optional?: string;
+    },
+    TContext
+  >;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof postJsonRequiredNullableOptional>>,
+  TError,
+  {
+    required: string;
+    nullable: string | null;
+    data: Json;
+    params: PostJsonRequiredNullableOptionalParams;
+    optional?: string;
+  },
+  TContext
+> => {
+  const mutationOptions =
+    getPostJsonRequiredNullableOptionalMutationOptions(options);
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postJsonRequiredNullableOptional>>, {required: string;nullable: string | null;data: AllTypes;params: PostJsonRequiredNullableOptionalParams;optional?: string}> = (props) => {
-          const {required,nullable,data,params,optional} = props ?? {};
-
-          return  postJsonRequiredNullableOptional(required,nullable,data,params,optional,)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type PostJsonRequiredNullableOptionalMutationResult = NonNullable<Awaited<ReturnType<typeof postJsonRequiredNullableOptional>>>
-    export type PostJsonRequiredNullableOptionalMutationBody = AllTypes
-    export type PostJsonRequiredNullableOptionalMutationError = unknown
-
-    export const usePostJsonRequiredNullableOptional = <TError = unknown,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postJsonRequiredNullableOptional>>, TError,{required: string;nullable: string | null;data: AllTypes;params: PostJsonRequiredNullableOptionalParams;optional?: string}, TContext>, }
-): UseMutationResult<
-        Awaited<ReturnType<typeof postJsonRequiredNullableOptional>>,
-        TError,
-        {required: string;nullable: string | null;data: AllTypes;params: PostJsonRequiredNullableOptionalParams;optional?: string},
-        TContext
-      > => {
-
-      const mutationOptions = getPostJsonRequiredNullableOptionalMutationOptions(options);
-
-      return useMutation(mutationOptions);
-    }
-    
+  return useMutation(mutationOptions);
+};

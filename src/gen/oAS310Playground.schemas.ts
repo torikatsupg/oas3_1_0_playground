@@ -4,16 +4,25 @@
  * OAS 3.1.0 Playground
  */
 export type PostMultipartFormDataRequiredNullableOptionalParams = {
-required: string;
-nullable: string | null;
-optional?: string;
+  required: string;
+  nullable: string | null;
+  optional?: string;
 };
 
 export type PostJsonRequiredNullableOptionalParams = {
-required: string;
-nullable: string | null;
-optional?: string;
+  required: string;
+  nullable: string | null;
+  optional?: string;
 };
+
+export type Enum = (typeof Enum)[keyof typeof Enum];
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const Enum = {
+  Inu: "dog",
+  Neko: "cat",
+  Tori: "bird",
+} as const;
 
 export type NullableBinary = Blob | null;
 
@@ -21,28 +30,48 @@ export type OptionalBinary = Blob;
 
 export type RequiredBinary = Blob;
 
-export type AllTypesObject = {
+export type MultipartFormDataObject = {
   key?: string;
 };
 
-export type AllTypesNullable = string | null;
+export type MultipartFormDataNullable = string | null;
 
-export type AllTypesEnum = unknown | unknown | unknown;
-
-export interface AllTypes {
+export interface MultipartFormData {
   array: string[];
   boolean: boolean;
   double: number;
-  enum: AllTypesEnum;
+  enum: Enum;
   float: number;
   int32: number;
   int64: number;
-  integer?: number;
-  nullable: AllTypesNullable;
+  integer: number;
+  nullable: MultipartFormDataNullable;
   number: number;
-  object: AllTypesObject;
+  object: MultipartFormDataObject;
   optional?: string;
   password: string;
   required: string;
 }
 
+export type JsonObject = {
+  key?: string;
+};
+
+export type JsonNullable = string | null;
+
+export interface Json {
+  array: string[];
+  boolean: boolean;
+  double: number;
+  enum: Enum;
+  float: number;
+  int32: number;
+  int64: number;
+  integer: number;
+  nullable: JsonNullable;
+  number: number;
+  object: JsonObject;
+  optional?: string;
+  password: string;
+  required: string;
+}

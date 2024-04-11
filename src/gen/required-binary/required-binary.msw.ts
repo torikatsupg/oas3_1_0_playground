@@ -3,34 +3,31 @@
  * Do not edit manually.
  * OAS 3.1.0 Playground
  */
-import {
-  faker
-} from '@faker-js/faker'
-import {
-  HttpResponse,
-  delay,
-  http
-} from 'msw'
-import type {
-  RequiredBinary
-} from '../oAS310Playground.schemas'
+import { faker } from "@faker-js/faker";
+import { HttpResponse, delay, http } from "msw";
+import type { RequiredBinary } from "../oAS310Playground.schemas";
 
-export const getPostBinaryRequiredResponseMock = (): RequiredBinary => (new Blob(faker.helpers.arrayElements(faker.word.words(10).split(' '))))
+export const getPostBinaryRequiredResponseMock = (): RequiredBinary =>
+  new Blob(faker.helpers.arrayElements(faker.word.words(10).split(" ")));
 
-
-export const getPostBinaryRequiredMockHandler = (overrideResponse?: RequiredBinary) => {
-  return http.post('*/binary/required', async () => {
+export const getPostBinaryRequiredMockHandler = (
+  overrideResponse?: RequiredBinary,
+) => {
+  return http.post("*/binary/required", async () => {
     await delay(1000);
-    return new HttpResponse(JSON.stringify(overrideResponse ? overrideResponse : getPostBinaryRequiredResponseMock()),
+    return new HttpResponse(
+      JSON.stringify(
+        overrideResponse
+          ? overrideResponse
+          : getPostBinaryRequiredResponseMock(),
+      ),
       {
         status: 200,
         headers: {
-          'Content-Type': 'application/json',
-        }
-      }
-    )
-  })
-}
-export const getRequiredBinaryMock = () => [
-  getPostBinaryRequiredMockHandler()
-]
+          "Content-Type": "application/json",
+        },
+      },
+    );
+  });
+};
+export const getRequiredBinaryMock = () => [getPostBinaryRequiredMockHandler()];

@@ -3,70 +3,77 @@
  * Do not edit manually.
  * OAS 3.1.0 Playground
  */
-import {
-  useMutation
-} from '@tanstack/react-query'
+import { useMutation } from "@tanstack/react-query";
 import type {
   MutationFunction,
   UseMutationOptions,
-  UseMutationResult
-} from '@tanstack/react-query'
-import type {
-  NullableBinary
-} from '../oAS310Playground.schemas'
-import { httpClient } from '../../httpClient';
+  UseMutationResult,
+} from "@tanstack/react-query";
+import type { NullableBinary } from "../oAS310Playground.schemas";
+import { httpClient } from "../../httpClient";
 
+export const postBinaryNullable = (nullableBinary: NullableBinary) => {
+  return httpClient<NullableBinary>({
+    url: `/binary/nullable`,
+    method: "POST",
+    headers: { "Content-Type": "application/octet-stream" },
+    data: nullableBinary,
+  });
+};
 
+export const getPostBinaryNullableMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof postBinaryNullable>>,
+    TError,
+    { data: NullableBinary },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof postBinaryNullable>>,
+  TError,
+  { data: NullableBinary },
+  TContext
+> => {
+  const { mutation: mutationOptions } = options ?? {};
 
-export const postBinaryNullable = (
-    nullableBinary: NullableBinary,
- ) => {
-      
-      
-      return httpClient<NullableBinary>(
-      {url: `/binary/nullable`, method: 'POST',
-      headers: {'Content-Type': 'application/octet-stream', },
-      data: nullableBinary
-    },
-      );
-    }
-  
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof postBinaryNullable>>,
+    { data: NullableBinary }
+  > = (props) => {
+    const { data } = props ?? {};
 
+    return postBinaryNullable(data);
+  };
 
-export const getPostBinaryNullableMutationOptions = <TError = unknown,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postBinaryNullable>>, TError,{data: NullableBinary}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof postBinaryNullable>>, TError,{data: NullableBinary}, TContext> => {
-const {mutation: mutationOptions} = options ?? {};
+  return { mutationFn, ...mutationOptions };
+};
 
-      
+export type PostBinaryNullableMutationResult = NonNullable<
+  Awaited<ReturnType<typeof postBinaryNullable>>
+>;
+export type PostBinaryNullableMutationBody = NullableBinary;
+export type PostBinaryNullableMutationError = unknown;
 
+export const usePostBinaryNullable = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof postBinaryNullable>>,
+    TError,
+    { data: NullableBinary },
+    TContext
+  >;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof postBinaryNullable>>,
+  TError,
+  { data: NullableBinary },
+  TContext
+> => {
+  const mutationOptions = getPostBinaryNullableMutationOptions(options);
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postBinaryNullable>>, {data: NullableBinary}> = (props) => {
-          const {data} = props ?? {};
-
-          return  postBinaryNullable(data,)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type PostBinaryNullableMutationResult = NonNullable<Awaited<ReturnType<typeof postBinaryNullable>>>
-    export type PostBinaryNullableMutationBody = NullableBinary
-    export type PostBinaryNullableMutationError = unknown
-
-    export const usePostBinaryNullable = <TError = unknown,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postBinaryNullable>>, TError,{data: NullableBinary}, TContext>, }
-): UseMutationResult<
-        Awaited<ReturnType<typeof postBinaryNullable>>,
-        TError,
-        {data: NullableBinary},
-        TContext
-      > => {
-
-      const mutationOptions = getPostBinaryNullableMutationOptions(options);
-
-      return useMutation(mutationOptions);
-    }
-    
+  return useMutation(mutationOptions);
+};

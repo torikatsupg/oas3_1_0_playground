@@ -19,6 +19,7 @@ export default defineConfig({
           useSuspenseQuery: true,
         },
       },
+      prettier: true,
     },
   },
 });

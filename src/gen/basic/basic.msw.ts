@@ -3,26 +3,17 @@
  * Do not edit manually.
  * OAS 3.1.0 Playground
  */
-import {
-  HttpResponse,
-  delay,
-  http
-} from 'msw'
-
+import { HttpResponse, delay, http } from "msw";
 
 export const getGetMockHandler = () => {
-  return http.get('*/', async () => {
+  return http.get("*/", async () => {
     await delay(1000);
-    return new HttpResponse(null,
-      {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      }
-    )
-  })
-}
-export const getBasicMock = () => [
-  getGetMockHandler()
-]
+    return new HttpResponse(null, {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  });
+};
+export const getBasicMock = () => [getGetMockHandler()];
