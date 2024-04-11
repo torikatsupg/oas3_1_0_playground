@@ -10,7 +10,7 @@ import type {
   UseMutationResult,
 } from "@tanstack/react-query";
 import type { OptionalBinary } from "../oAS310Playground.schemas";
-import { httpClient } from "../../httpClient";
+import { httpClient } from "../../../httpClient";
 
 export const postBinaryOptional = (optionalBinary: OptionalBinary) => {
   return httpClient<OptionalBinary>({

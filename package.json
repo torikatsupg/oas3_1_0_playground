@@ -7,7 +7,8 @@
     "start": "ts-node index.ts",
     "oas:preview": "redocly preview-docs ./__api__/index.yaml",
     "oas:lint": "redocly lint ./__api__/index.yaml",
-    "gen": "orval"
+    "gen:hooks": "orval --config ./orval.react-query.config.ts",
+    "gen:zod": "orval --config ./orval.zod.config.ts"
   },
   "author": "",
   "license": "ISC",
@@ -21,6 +22,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.29.2",
-    "axios": "^1.6.8"
+    "axios": "^1.6.8",
+    "zod": "^3.22.4"
   }
 }

@@ -12,15 +12,18 @@ import type {
 import type {
   MultipartFormData,
   PostMultipartFormDataRequiredNullableOptionalParams,
+  PostMultipartFormDataRequiredNullableOptionalPathParameters,
 } from "../oAS310Playground.schemas";
-import { httpClient } from "../../httpClient";
+import { httpClient } from "../../../httpClient";
 
 export const postMultipartFormDataRequiredNullableOptional = (
-  required: string,
-  nullable: string | null,
+  {
+    required,
+    nullable,
+    optional,
+  }: PostMultipartFormDataRequiredNullableOptionalPathParameters,
   multipartFormData: MultipartFormData,
   params: PostMultipartFormDataRequiredNullableOptionalParams,
-  optional?: string,
 ) => {
   const formData = new FormData();
   formData.append("required", multipartFormData.required);
@@ -39,6 +42,12 @@ export const postMultipartFormDataRequiredNullableOptional = (
   formData.append("float", multipartFormData.float.toString());
   formData.append("double", multipartFormData.double.toString());
   formData.append("password", multipartFormData.password);
+  if (multipartFormData.date !== undefined) {
+    formData.append("date", multipartFormData.date);
+  }
+  if (multipartFormData["date-time"] !== undefined) {
+    formData.append("date-time", multipartFormData["date-time"]);
+  }
 
   return httpClient<Blob>({
     url: `/multipart_form-data/${required}/${nullable}/${optional}`,
@@ -58,11 +67,9 @@ export const getPostMultipartFormDataRequiredNullableOptionalMutationOptions = <
     Awaited<ReturnType<typeof postMultipartFormDataRequiredNullableOptional>>,
     TError,
     {
-      required: string;
-      nullable: string | null;
+      pathParams: PostMultipartFormDataRequiredNullableOptionalPathParameters;
       data: MultipartFormData;
       params: PostMultipartFormDataRequiredNullableOptionalParams;
-      optional?: string;
     },
     TContext
   >;
@@ -70,11 +77,9 @@ export const getPostMultipartFormDataRequiredNullableOptionalMutationOptions = <
   Awaited<ReturnType<typeof postMultipartFormDataRequiredNullableOptional>>,
   TError,
   {
-    required: string;
-    nullable: string | null;
+    pathParams: PostMultipartFormDataRequiredNullableOptionalPathParameters;
     data: MultipartFormData;
     params: PostMultipartFormDataRequiredNullableOptionalParams;
-    optional?: string;
   },
   TContext
 > => {
@@ -83,21 +88,17 @@ export const getPostMultipartFormDataRequiredNullableOptionalMutationOptions = <
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof postMultipartFormDataRequiredNullableOptional>>,
     {
-      required: string;
-      nullable: string | null;
+      pathParams: PostMultipartFormDataRequiredNullableOptionalPathParameters;
       data: MultipartFormData;
       params: PostMultipartFormDataRequiredNullableOptionalParams;
-      optional?: string;
     }
   > = (props) => {
-    const { required, nullable, data, params, optional } = props ?? {};
+    const { pathParams, data, params } = props ?? {};
 
     return postMultipartFormDataRequiredNullableOptional(
-      required,
-      nullable,
+      pathParams,
       data,
       params,
-      optional,
     );
   };
 
@@ -121,11 +122,9 @@ export const usePostMultipartFormDataRequiredNullableOptional = <
     Awaited<ReturnType<typeof postMultipartFormDataRequiredNullableOptional>>,
     TError,
     {
-      required: string;
-      nullable: string | null;
+      pathParams: PostMultipartFormDataRequiredNullableOptionalPathParameters;
       data: MultipartFormData;
       params: PostMultipartFormDataRequiredNullableOptionalParams;
-      optional?: string;
     },
     TContext
   >;
@@ -133,11 +132,9 @@ export const usePostMultipartFormDataRequiredNullableOptional = <
   Awaited<ReturnType<typeof postMultipartFormDataRequiredNullableOptional>>,
   TError,
   {
-    required: string;
-    nullable: string | null;
+    pathParams: PostMultipartFormDataRequiredNullableOptionalPathParameters;
     data: MultipartFormData;
     params: PostMultipartFormDataRequiredNullableOptionalParams;
-    optional?: string;
   },
   TContext
 > => {

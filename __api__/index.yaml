@@ -233,6 +233,12 @@ components:
         password:
           type: string
           format: password
+        date:
+          type: string
+          format: date
+        date-time:
+          type: string
+          format: date-time
 
     multipartFormData:
       type: object
@@ -292,6 +298,13 @@ components:
         password:
           type: string
           format: password
+        date:
+          type: string
+          format: date
+        date-time:
+          type: string
+          format: date-time
+
     requiredBinary:
       type: string
       format: binary

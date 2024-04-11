@@ -9,12 +9,22 @@ export type PostMultipartFormDataRequiredNullableOptionalParams = {
   optional?: string;
 };
 
+export type PostMultipartFormDataRequiredNullableOptionalPathParameters = {
+  required: string;
+  nullable: string | null;
+  optional?: string;
+};
 export type PostJsonRequiredNullableOptionalParams = {
   required: string;
   nullable: string | null;
   optional?: string;
 };
 
+export type PostJsonRequiredNullableOptionalPathParameters = {
+  required: string;
+  nullable: string | null;
+  optional?: string;
+};
 export type Enum = (typeof Enum)[keyof typeof Enum];
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
@@ -39,6 +49,8 @@ export type MultipartFormDataNullable = string | null;
 export interface MultipartFormData {
   array: string[];
   boolean: boolean;
+  date?: Date;
+  "date-time"?: Date;
   double: number;
   enum: Enum;
   float: number;
@@ -62,6 +74,8 @@ export type JsonNullable = string | null;
 export interface Json {
   array: string[];
   boolean: boolean;
+  date?: Date;
+  "date-time"?: Date;
   double: number;
   enum: Enum;
   float: number;

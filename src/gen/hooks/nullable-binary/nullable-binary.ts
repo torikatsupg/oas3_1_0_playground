@@ -10,7 +10,7 @@ import type {
   UseMutationResult,
 } from "@tanstack/react-query";
 import type { NullableBinary } from "../oAS310Playground.schemas";
-import { httpClient } from "../../httpClient";
+import { httpClient } from "../../../httpClient";
 
 export const postBinaryNullable = (nullableBinary: NullableBinary) => {
   return httpClient<NullableBinary>({

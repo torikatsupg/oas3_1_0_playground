@@ -10,7 +10,7 @@ import type {
   UseMutationResult,
 } from "@tanstack/react-query";
 import type { RequiredBinary } from "../oAS310Playground.schemas";
-import { httpClient } from "../../httpClient";
+import { httpClient } from "../../../httpClient";
 
 export const postBinaryRequired = (requiredBinary: RequiredBinary) => {
   return httpClient<RequiredBinary>({

@@ -15,6 +15,14 @@ export const getPostMultipartFormDataRequiredNullableOptionalResponseMock = (
     (_, i) => i + 1,
   ).map(() => faker.word.sample()),
   boolean: faker.datatype.boolean(),
+  date: faker.helpers.arrayElement([
+    faker.date.past().toISOString().split("T")[0],
+    undefined,
+  ]),
+  "date-time": faker.helpers.arrayElement([
+    `${faker.date.past().toISOString().split(".")[0]}Z`,
+    undefined,
+  ]),
   double: faker.number.int({ min: undefined, max: undefined }),
   enum: faker.helpers.arrayElement(Object.values(Enum)),
   float: faker.number.int({ min: undefined, max: undefined }),

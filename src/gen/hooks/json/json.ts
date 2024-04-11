@@ -12,15 +12,18 @@ import type {
 import type {
   Json,
   PostJsonRequiredNullableOptionalParams,
+  PostJsonRequiredNullableOptionalPathParameters,
 } from "../oAS310Playground.schemas";
-import { httpClient } from "../../httpClient";
+import { httpClient } from "../../../httpClient";
 
 export const postJsonRequiredNullableOptional = (
-  required: string,
-  nullable: string | null,
+  {
+    required,
+    nullable,
+    optional,
+  }: PostJsonRequiredNullableOptionalPathParameters,
   json: Json,
   params: PostJsonRequiredNullableOptionalParams,
-  optional?: string,
 ) => {
   return httpClient<Json>({
     url: `/json/${required}/${nullable}/${optional}`,
@@ -39,11 +42,9 @@ export const getPostJsonRequiredNullableOptionalMutationOptions = <
     Awaited<ReturnType<typeof postJsonRequiredNullableOptional>>,
     TError,
     {
-      required: string;
-      nullable: string | null;
+      pathParams: PostJsonRequiredNullableOptionalPathParameters;
       data: Json;
       params: PostJsonRequiredNullableOptionalParams;
-      optional?: string;
     },
     TContext
   >;
@@ -51,11 +52,9 @@ export const getPostJsonRequiredNullableOptionalMutationOptions = <
   Awaited<ReturnType<typeof postJsonRequiredNullableOptional>>,
   TError,
   {
-    required: string;
-    nullable: string | null;
+    pathParams: PostJsonRequiredNullableOptionalPathParameters;
     data: Json;
     params: PostJsonRequiredNullableOptionalParams;
-    optional?: string;
   },
   TContext
 > => {
@@ -64,22 +63,14 @@ export const getPostJsonRequiredNullableOptionalMutationOptions = <
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof postJsonRequiredNullableOptional>>,
     {
-      required: string;
-      nullable: string | null;
+      pathParams: PostJsonRequiredNullableOptionalPathParameters;
       data: Json;
       params: PostJsonRequiredNullableOptionalParams;
-      optional?: string;
     }
   > = (props) => {
-    const { required, nullable, data, params, optional } = props ?? {};
+    const { pathParams, data, params } = props ?? {};
 
-    return postJsonRequiredNullableOptional(
-      required,
-      nullable,
-      data,
-      params,
-      optional,
-    );
+    return postJsonRequiredNullableOptional(pathParams, data, params);
   };
 
   return { mutationFn, ...mutationOptions };
@@ -99,11 +90,9 @@ export const usePostJsonRequiredNullableOptional = <
     Awaited<ReturnType<typeof postJsonRequiredNullableOptional>>,
     TError,
     {
-      required: string;
-      nullable: string | null;
+      pathParams: PostJsonRequiredNullableOptionalPathParameters;
       data: Json;
       params: PostJsonRequiredNullableOptionalParams;
-      optional?: string;
     },
     TContext
   >;
@@ -111,11 +100,9 @@ export const usePostJsonRequiredNullableOptional = <
   Awaited<ReturnType<typeof postJsonRequiredNullableOptional>>,
   TError,
   {
-    required: string;
-    nullable: string | null;
+    pathParams: PostJsonRequiredNullableOptionalPathParameters;
     data: Json;
     params: PostJsonRequiredNullableOptionalParams;
-    optional?: string;
   },
   TContext
 > => {

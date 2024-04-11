@@ -12,7 +12,7 @@ import type {
   UseSuspenseQueryOptions,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { httpClient } from "../../httpClient";
+import { httpClient } from "../../../httpClient";
 
 /**
  * @summary basic endpoint
