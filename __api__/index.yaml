@@ -11,6 +11,46 @@ paths:
         200:
           description: ok
 
+  /operationId/{required}:
+    parameters:
+      - in: path
+        name: required
+        required: true
+        schema:
+          type: string
+    get:
+      operationId: specified at operationId
+      summary: specified at Summary
+      description: specified at description
+      tags: 
+        - operationId
+      responses:
+        200:
+          description: ok
+    post:
+      operationId: specified at operationId
+      description: specified at description
+      tags: 
+        - operationId
+      responses:
+        200:
+          description: ok
+
+    put:
+      description: specified at description
+      tags: 
+        - operationId
+      responses:
+        200:
+          description: ok
+
+    delete:
+      tags: 
+        - operationId
+      responses:
+        200:
+          description: ok
+
   /json/{required}/{nullable}/{optional}:
     post:
       tags: 
